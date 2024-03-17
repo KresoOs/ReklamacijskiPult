@@ -7,7 +7,7 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class DjelatnikController
+    public class DjelatnikController: ControllerBase
     {
         private readonly ReklamacijskiPultContext _context;
 
