@@ -7,5 +7,6 @@ namespace Backend.Data
     {
         public ReklamacijskiPultContext(DbContextOptions<ReklamacijskiPultContext> options) : base(options) { }
         public DbSet<Djelatnik> Djelatnici { get; set; }
+        public DbSet<Proizvod> Proizvodi { get; set; }
     }
 }
