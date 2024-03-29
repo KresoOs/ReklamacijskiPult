@@ -4,6 +4,8 @@ import Container from 'react-bootstrap/Container';
 
 import DjelatnikService from '../../services/DjelatnikService';
 import { Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { RoutesNames } from '../../constants';
 
 
 
@@ -40,6 +42,7 @@ export default function Djelatnici(){
 return(
     
     <Container>
+     <Link to={RoutesNames.DJELATNIK_NOVI}>Dodaj</Link>
       <Table striped bordered hover responsive>
         <thead>
           <tr>

@@ -1,11 +1,11 @@
 export const RoutesNames = {
 
 HOME: '/',
-DJELATNIK_PREGLED: '/djelatnici/dodaj',
+DJELATNIK_PREGLED: '/djelatnici',
 DJELATNIK_NOVI: '/djelatnici/dodaj',
 DJELATNIK_PROMJENI: '/djelatnici/:sifra',
 
-PROIZVOD_PREGLED: '/proizvodi/dodaj',
+PROIZVOD_PREGLED: '/proizvodi',
 PROIZVOD_NOVI: '/proizvodi/dodaj',
 PROIZVOD_PROMJENI: '/proizvodi/:sifra'
 

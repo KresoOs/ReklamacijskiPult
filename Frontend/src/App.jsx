@@ -9,6 +9,7 @@ import { Route, Routes } from 'react-router-dom'
 
 import Pocetna from './pages/Pocetna'
 import Djelatnici from './pages/djelatnici/Djelatnici'
+import DjelatniciDodaj from './pages/djelatnici/DjelatniciDodaj'
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <Routes>
       <Route path={RoutesNames.HOME} element={<Pocetna/>}/>
       <Route path={RoutesNames.DJELATNIK_PREGLED} element={<Djelatnici/>}/>
+      <Route path={RoutesNames.DJELATNIK_NOVI} element={<DjelatniciDodaj />}/>
         
       </Routes>
     </>

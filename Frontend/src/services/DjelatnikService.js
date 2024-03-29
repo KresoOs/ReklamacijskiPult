@@ -22,7 +22,24 @@ return odgovor.data;
     })
 
 }
+async function post(djelatnik){
+
+    return await HttpService.post(naziv_djelatnik,djelatnik)
+    .then((odgovor)=>{
+
+//console.table(odgovor.data);
+return { greska: false, poruka: odgovor.data};
+
+    })
+    .catch((e)=>{
+
+       // console.log(e);
+       return {greska: true, poruka: e };
+    })
+
+}
 
 export default{
-    get
+    get,
+    post
 }
