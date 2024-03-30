@@ -9,7 +9,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext< ReklamacijskiPultContext>(o =>
+builder.Services.AddCors(opcije =>
+{
+    opcije.AddPolicy("CorsPolicy",builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+});
+builder.Services.AddDbContext<ReklamacijskiPultContext>(o =>
 {
     o.UseSqlServer(builder.Configuration.GetConnectionString("ReklamacijskiPultContext"));
 });
@@ -28,7 +32,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UseCors("CorsPolicy");
 app.UseStaticFiles();
 app.UseDefaultFiles();
 app.MapFallbackToFile("index.html");
