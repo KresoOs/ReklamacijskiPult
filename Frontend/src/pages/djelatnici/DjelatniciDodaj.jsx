@@ -6,7 +6,9 @@ import DjelatnikService from "../../services/DjelatnikService";
 
 
 export default function DjelatniciDodaj(){
+
     const navigate = useNavigate();
+    
     async function dodaj(djelatnik){
         const odgovor = await DjelatnikService.post(djelatnik);
         if(odgovor.greska){

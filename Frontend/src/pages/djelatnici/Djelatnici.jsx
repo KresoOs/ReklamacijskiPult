@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 
 import DjelatnikService from '../../services/DjelatnikService';
-import { Table } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Button, Table } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import { RoutesNames } from '../../constants';
 
 
@@ -16,6 +16,7 @@ import { RoutesNames } from '../../constants';
 export default function Djelatnici(){
 
   const[djelatnici,setDjelatnici] = useState();
+  const navigate = useNavigate();
 
   async function dohvatiDjelatnike(){
     await DjelatnikService.get()
@@ -35,9 +36,27 @@ export default function Djelatnici(){
 
     dohvatiDjelatnike();
 
-},[]
+},[]);
 
-  );
+async function obrisiAsync(sifra){
+  const odgovor = await DjelatnikService._delete(sifra);
+  if(odgovor.greska){
+      console.log(odgovor.poruka);
+      alert('Pogledaj konzolu');
+      return;
+  }
+  dohvatiDjelatnike();
+}
+
+function obrisi(sifra){
+  
+  obrisiAsync(sifra);
+
+
+}
+
+
+
     
 return(
     
@@ -52,6 +71,10 @@ return(
             <th>
               Prezime
             </th>
+            <th>
+              Akcija
+            </th>
+
           </tr>
         </thead>
         <tbody>
@@ -60,6 +83,10 @@ return(
            <tr key={index}>
             <td>{djelatnik.ime}</td>
             <td>{djelatnik.prezime}</td>
+            <td>
+              <Button onClick={()=>obrisi(djelatnik.sifra)}variant='danger'>Obriši</Button>
+              <Button onClick={()=>{navigate(`/djelatnici/${djelatnik.sifra}`)}} >Promijeni</Button>
+            </td>
 
            </tr>
 

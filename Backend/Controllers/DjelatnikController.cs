@@ -16,6 +16,12 @@ namespace Backend.Controllers
             _context = context;
         }
         [HttpGet]
+        [Route("{sifra:int}")]
+        public IActionResult GetBySifra(int sifra)
+        {
+            return new JsonResult(_context.Djelatnici.Find(sifra));
+        }
+        [HttpGet]
         public IActionResult Get()
         {
             return new JsonResult(_context.Djelatnici.ToList());
