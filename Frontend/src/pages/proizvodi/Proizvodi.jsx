@@ -2,11 +2,11 @@
 import { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 
-import DjelatnikService from '../../services/DjelatnikService';
+
 import { Button, Table } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { RoutesNames } from '../../constants';
-import DjelatniciDodaj from './DjelatniciDodaj';
+import ProizvodService from '../../services/ProizvodService';
 
 
 
@@ -14,17 +14,17 @@ import DjelatniciDodaj from './DjelatniciDodaj';
 
 
 
-export default function Djelatnici(){
+export default function Proizvodi(){
 
-  const[djelatnici,setDjelatnici] = useState();
+  const[Proizvodi,setProizvodi] = useState();
   const navigate = useNavigate();
 
-  async function dohvatiDjelatnike(){
-    await DjelatnikService.get()
+  async function dohvatiProizvode(){
+    await ProizvodService.get()
     .then((odg)=>{
 
 
-      setDjelatnici(odg);
+      setProizvodi(odg);
 
     })
     .catch((e=>{
@@ -35,18 +35,18 @@ export default function Djelatnici(){
   }
   useEffect(()=>{
 
-    dohvatiDjelatnike();
+    dohvatiProizvode();
 
 },[]);
 
 async function obrisiAsync(sifra){
-  const odgovor = await DjelatnikService._delete(sifra);
+  const odgovor = await ProizvodService._delete(sifra);
   if(odgovor.greska){
       console.log(odgovor.poruka);
       alert('Pogledaj konzolu');
       return;
   }
-  dohvatiDjelatnike();
+  dohvatiProizvode();
 }
 
 function obrisi(sifra){
@@ -62,7 +62,7 @@ function obrisi(sifra){
 return(
     
     <Container>
-     <Link to={RoutesNames.DJELATNIK_NOVI}>Dodaj</Link>
+     <Link to={RoutesNames.PROIZVOD_NOVI}>Dodaj</Link>
       <Table striped bordered hover responsive>
         <thead>
           <tr>
@@ -70,7 +70,10 @@ return(
               Ime
             </th>
             <th>
-              Prezime
+              Opis
+            </th>
+            <th>
+              Jedinica Količine
             </th>
             <th>
               Akcija
@@ -79,15 +82,15 @@ return(
           </tr>
         </thead>
         <tbody>
-          {djelatnici && djelatnici.map((djelatnik,index)=>(
+          {Proizvodi && Proizvodi.map((proizvod,index)=>(
 
            <tr key={index}>
-            <td>{djelatnik.ime}</td>
-            <td>{djelatnik.prezime}</td>
+            <td>{proizvod.ime}</td>
+            <td>{proizvod.opis}</td>
+            <td>{proizvod.jedinica_Kolicine}</td>
             <td>
-              <Button onClick={()=>obrisi(djelatnik.sifra)}variant='danger'>Obriši</Button>
-             
-              <Button onClick={()=>{navigate(`/djelatnici/${djelatnik.sifra}`)}} >Promijeni</Button>
+              <Button onClick={()=>obrisi(proizvod.sifra)}variant='danger'>Obriši</Button>
+              <Button onClick={()=>{navigate(`/proizvodi/${proizvod.sifra}`)}} >Promijeni</Button>
             </td>
 
            </tr>
