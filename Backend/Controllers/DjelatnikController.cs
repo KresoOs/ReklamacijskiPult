@@ -7,53 +7,24 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class DjelatnikController: ControllerBase
+    public class DjelatnikController : ReklamacijskiController<Djelatnik,DjelatnikDTORead,DjelatnikDTOInsertUpdate>
     {
-        private readonly ReklamacijskiPultContext _context;
 
-        public DjelatnikController(ReklamacijskiPultContext context)
+        public DjelatnikController(ReklamacijskiPultContext context): base(context) 
         {
-            _context = context;
+            DbSet= _context.Djelatnici;
+
         }
-        [HttpGet]
-        [Route("{sifra:int}")]
-        public IActionResult GetBySifra(int sifra)
+        protected override void KontrolaBrisanje(Djelatnik entitet)
         {
-            return new JsonResult(_context.Djelatnici.Find(sifra));
+            var entitetIzbaze = _context.Djelatnici;
+            if (entitetIzbaze == null)
+            {
+                throw new Exception("Ne postoji Djelatnik s šifrom " + entitet.Sifra + " u bazi");
+            }
         }
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return new JsonResult(_context.Djelatnici.ToList());
-        }
-        [HttpPost]
-        public IActionResult Post(Djelatnik djelatnik)
-        {
-            _context.Djelatnici.Add(djelatnik);
-            _context.SaveChanges();
-            return new JsonResult(djelatnik);
-        }
-        [HttpPut]
-        [Route("{sifra:int}")]
-        public IActionResult Put(int sifra, Djelatnik djelatnik)
-        {
-            var djelatnikIzBaze = _context.Djelatnici.Find(sifra);
-            djelatnikIzBaze.Ime = djelatnik.Ime;
-            djelatnikIzBaze.Prezime = djelatnik.Prezime;
-            _context.Djelatnici.Update(djelatnikIzBaze);
-            _context.SaveChanges();
-            return new JsonResult(djelatnikIzBaze);
-        }
-        [HttpDelete]
-        [Route("{sifra:int}")]
-        [Produces("application/json")]
-        public IActionResult Delete(int sifra)
-        {
-            var djelatnikIzBaze = _context.Djelatnici.Find(sifra);
-            
-            _context.Djelatnici.Remove(djelatnikIzBaze);
-            _context.SaveChanges();
-            return new JsonResult(new {poruka="Obrisano" });
-        }
+
+
+
     }
 }

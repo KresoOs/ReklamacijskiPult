@@ -1,64 +1,43 @@
 ﻿using Backend.Data;
 using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 
 namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class ProizvodController: ControllerBase 
+    public class ProizvodController : ReklamacijskiController<Proizvod, ProizvodDTORead, ProizvodDTOInsertUpdate>
     {
-        private readonly ReklamacijskiPultContext _context;
-
-        public ProizvodController(ReklamacijskiPultContext context)
+        public ProizvodController(ReklamacijskiPultContext context) : base(context)
         {
-            _context = context;
-        }
-        [HttpGet]
-
-        public IActionResult Get()
-        {
-            return new JsonResult(_context.Proizvodi.ToList());
+            DbSet = _context.Proizvodi;
 
         }
-        [HttpGet]
-        [Route("{sifra:int}")]
-        public IActionResult GetBySifra(int sifra)
-        {
-            return new JsonResult(_context.Proizvodi.Find(sifra));
-        }
-        [HttpPost]
 
-        public IActionResult Post(Proizvod proizvod)
+        protected override void KontrolaBrisanje(Proizvod entitet)
         {
-            _context.Proizvodi.Add(proizvod);
-            _context.SaveChanges();
-            return new JsonResult(proizvod);
+
+            var lista = _context.Radninalozi
+                .Include(x => x.Proizvod)
+                .Where(x => x.Proizvod.Sifra == entitet.Sifra)
+                .ToList();
+            if (lista != null && lista.Count > 0)
+            {
+                StringBuilder sb = new();
+                sb.Append("Proizvod se ne može obrisati jer ima radni nalog br: ");
+                foreach (var e in lista)
+                {
+                    sb.Append(e.Sifra).Append(", ");
+                }
+                throw new Exception(sb.ToString()[..^2]);
+            }
+
+
 
         }
-        [HttpPut]
-        [Route("{sifra:int}")]
-        public IActionResult Put(int sifra, Proizvod proizvod)
-        {
-            var proizvodIzBaze = _context.Proizvodi.Find(sifra);
-            proizvodIzBaze.Ime = proizvod.Ime;
-            proizvodIzBaze.Opis = proizvod.Opis;
-            proizvodIzBaze.Jedinica_Kolicine = proizvod.Jedinica_Kolicine;
-            _context.Proizvodi.Update(proizvodIzBaze);
-            _context.SaveChanges();
-            return new JsonResult(proizvodIzBaze);
-        }
-        [HttpDelete]
-        [Route("{sifra:int}")]
-        [Produces("aplication/json")]
-        public IActionResult Delete(int sifra)
-        {
-            var proizvodIzBaze = _context.Proizvodi.Find(sifra);
-            _context.Proizvodi.Remove(proizvodIzBaze);
-            _context.SaveChanges(); 
-            return new JsonResult(new {poruka="Obrisano"});
-        }
-
     }
 }
+
