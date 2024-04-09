@@ -48,26 +48,15 @@ namespace Backend.Models
         string? Jedinica_Kolicine);
 
 
-    public record RadninalogDTORead(int Sifra, string ProizvodIme, string KupacImePrezime, DateTime Datum);
-
-    public record RadninalogDTOInsertUpdate(
-
-        [Required(ErrorMessage ="Obavezan unos")]
-        string? ProizvodIme,
-        [Required(ErrorMessage ="Obavezan unos")]
-        string? KupacImePrezime,
-        [Required(ErrorMessage = "Obavezan unos")]
-
-        DateTime? Datum);
+   
 
 
 
-    public record StatusDTORead(int RadninalogSifra, string DjelatnikImeprezime, string Naziv);
+    public record StanjeDTORead( string Naziv);
 
-    public record StatusDTOInsertUpdate(
+    public record StanjeDTOInsertUpdate(
 
-        [Required(ErrorMessage ="Obavezan unos")]
-        string? DjelatnikImeprezime,
+        
         [Required(ErrorMessage ="Obavezan unos")]
         string? Naziv);
 

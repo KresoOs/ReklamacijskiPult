@@ -9,8 +9,8 @@ namespace Backend.Data
         public DbSet<Djelatnik> Djelatnici { get; set; }
         public DbSet<Proizvod> Proizvodi { get; set; }
 
-        public DbSet<Radninalog> Radninalozi { get; set; }
-        public DbSet<Status> Statusi { get; set; }
+        
+        public DbSet<Stanje> Stanja { get; set; }
         public DbSet<Kupac> Kupci { get; set; }
     }
 }
