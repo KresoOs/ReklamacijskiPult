@@ -21,7 +21,7 @@ namespace Backend.Controllers
             var entitetIzbaze = _context.Proizvodi;
             if (entitetIzbaze == null)
             {
-                throw new Exception("Ne postoji Djelatnik s šifrom " + entitet.Sifra + " u bazi");
+                throw new Exception("Ne postoji Proizvod s šifrom " + entitet.Sifra + " u bazi");
             }
         }
 
