@@ -8,6 +8,7 @@ namespace Backend.Models
         
 
         public String? Naziv {  get; set; }
+        public ICollection<Radninalog>? Radninalozi { get; } = [];
 
     }
 }

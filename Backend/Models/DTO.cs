@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Backend.Models
 {
-    public record DjelatnikDTORead(int Sifra, string Ime, string Prezime);
+    public record DjelatnikDTORead(int Sifra, string? Ime, string? Prezime);
 
     public record DjelatnikDTOInsertUpdate(
 
@@ -18,7 +18,7 @@ namespace Backend.Models
         string? Prezime);
 
 
-    public record KupacDTORead(int Sifra, string Ime, string Prezime, string Telefon, string Email);
+    public record KupacDTORead(int Sifra, string? Ime, string? Prezime, string? Telefon, string? Email);
 
     public record KupacDTOInsertUpdate(
 
@@ -36,7 +36,7 @@ namespace Backend.Models
         string? Email);
 
 
-    public record ProizvodDTORead(int Sifra, string Ime, string Opis, string Jedinica_Kolicine);
+    public record ProizvodDTORead(int Sifra, string? Ime, string? Opis, string? Jedinica_Kolicine);
 
     public record ProizvodDTOInsertUpdate(
 
@@ -48,19 +48,38 @@ namespace Backend.Models
         string? Jedinica_Kolicine);
 
 
-   
 
 
 
-    public record StanjeDTORead( string Naziv);
+
+    public record StanjeDTORead(int Sifra, string? Naziv);
 
     public record StanjeDTOInsertUpdate(
 
-        
+
         [Required(ErrorMessage ="Obavezan unos")]
         string? Naziv);
 
+    public record RadninalogDTORead(int Sifra, string? ProizvodIme, string? KupacImePrezime, DateTime? Datum, string? Napomena);
 
+    public record RadninalogDTOInsertUpdate(
+
+        int? ProizvodSifra,
+        int? KupacSifra,
+        [Required(ErrorMessage ="Obavezan unos")]
+        DateTime? Datum,
+        [Required(ErrorMessage ="Obavezan unos")]
+        string? Napomena
+
+
+        );
+    public record PromjenaDTORead(int sifra , int? DjelatnikSifra , int? StanjeSifra , int? RadninalogSifra );
+
+    public record PromjenaDTOInsertUpdate(
+        int? DjelatnikSifra,
+        int? StanjeSifra,
+        int? RadninalogSifra
+        );
 
 
 

@@ -6,5 +6,8 @@
         public string? Opis { get; set; }
 
         public string? Jedinica_Kolicine { get; set; }
+
+        public ICollection<Radninalog>? Radninalozi { get; } = [];
+
     }
 }

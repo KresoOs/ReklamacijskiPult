@@ -14,35 +14,30 @@ namespace Backend.Controllers
         public KupacController(ReklamacijskiPultContext context) : base(context)
         {
             DbSet = _context.Kupci;
-        }
+        }        
+        
+            
+
+
         protected override void KontrolaBrisanje(Kupac entitet)
-        {
-            var entitetIzbaze = _context.Kupci;
-            if (entitetIzbaze == null)
             {
-                throw new Exception("Ne postoji Djelatnik s šifrom " + entitet.Sifra + " u bazi");
-            }
+
+            var entitetizbaze = _context.Kupci
+            .Include(x => x.Radninalozi)
+            .FirstOrDefault(x=>x.Sifra == entitet.Sifra);
+             if (entitetizbaze.Radninalozi != null && entitetizbaze.Radninalozi.Count > 0)
+                {
+                    StringBuilder sb = new();
+                 sb.Append("Kupac se ne može obrisati jer ima radni nalog br: ");
+                    foreach (var e in entitetizbaze.Radninalozi)
+                     {
+                    sb.Append(e.Sifra).Append(", ");
+                     }
+                     throw new Exception(sb.ToString()[..^2]);
+                 }
+
+
+
         }
-        //protected override void KontrolaBrisanje(Kupac entitet)
-        //{
-
-        //    var lista = _context.Radninalozi
-        //        .Include(x => x.Kupac)
-        //        .Where(x=> x.Kupac.Sifra == entitet.Sifra)
-        //        .ToList();
-        //    if (lista != null && lista.Count >0)
-        //    {
-        //        StringBuilder sb = new();
-        //        sb.Append("Kupac se ne može obrisati jer ima radni nalog br: ");
-        //        foreach (var e in lista)
-        //        {
-        //            sb.Append(e.Sifra).Append(", ");
-        //        }
-        //        throw new Exception(sb.ToString()[..^2]);
-        //    }
-
-
-
-    }
-    }
+}   }
 
