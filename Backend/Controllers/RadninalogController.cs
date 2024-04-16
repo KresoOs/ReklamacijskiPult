@@ -4,6 +4,7 @@ using Backend.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Backend.Controllers
 {
@@ -39,7 +40,50 @@ namespace Backend.Controllers
             return entitet;
             
         }
-        
+        protected override List<RadninalogDTORead> UcitajSve()
+        {
+            var lista = _context.Radninalozi
+                    .Include(g => g.Proizvod)
+                    .Include(g=>g.Kupac)
+                    
+                    
+                    .ToList();
+            if (lista == null || lista.Count == 0)
+            {
+                throw new Exception("Ne postoje podaci u bazi");
+            }
+            return _mapper.MapReadList(lista);
 
+
+
+        }
+        protected override Radninalog NadiEntitet(int sifra)
+        {
+            return _context.Radninalozi.Include(g => g.Proizvod).Include(g=>g.Kupac).FirstOrDefault(x=>x.Sifra == sifra) ?? throw new Exception("Ne postoji nalog s šifrom " + sifra + " u bazi");
+        }
+        protected override Radninalog PromjeniEntitet(RadninalogDTOInsertUpdate dto, Radninalog entitet)
+        {
+            var kupac = _context.Kupci.Find(dto.KupacSifra) ?? throw new Exception("Ne postoji kupac s šifrom " + dto.KupacSifra + " u bazi");
+            var proizvod = _context.Proizvodi.Find(dto.ProizvodSifra) ?? throw new Exception("Ne postoji proizvod s šifrom " + dto.ProizvodSifra + " u bazi");
+
+
+            /*
+            List<Polaznik> polaznici = entitet.Polaznici;
+            entitet = _mapper.MapInsertUpdatedFromDTO(dto);
+            entitet.Polaznici = polaznici;
+            */
+
+            // ovdje je možda pametnije ići s ručnim mapiranje
+            entitet.Proizvod = proizvod;
+            entitet.Kupac = kupac;
+            entitet.Datum = dto.Datum;
+            entitet.Napomena = dto.Napomena;
+            
+
+            return entitet;
+        }
     }
+
+
+    
 }

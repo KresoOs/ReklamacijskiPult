@@ -14,7 +14,7 @@ namespace Backend.Models
 
         public DateTime? Datum { get; set; }
 
-        public string Napomena  { get; set; }
+        public string? Napomena  { get; set; }
 
         public List<Djelatnik>? Djelatnici { get; set; }
         public List<Stanje>? Stanja { get; set; }
