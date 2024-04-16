@@ -7,7 +7,11 @@ DJELATNIK_PROMJENI: '/djelatnici/:sifra',
 
 PROIZVOD_PREGLED: '/proizvodi',
 PROIZVOD_NOVI: '/proizvodi/dodaj',
-PROIZVOD_PROMJENI: '/proizvodi/:sifra'
+PROIZVOD_PROMJENI: '/proizvodi/:sifra',
+
+RADNINALOG_PREGLED: '/radninalozi',
+RADNINALOG_NOVI: '/radninalozi/dodaj',
+RADNINALOG_PROMIJENI: '/radninalozi/:sifra'
 
 };
 export const naziv_djelatnik = '/Djelatnik'
