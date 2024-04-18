@@ -14,6 +14,9 @@ import DjelatniciPromjena from './pages/djelatnici/DjelatniciPromjena'
 import Proizvodi from './pages/proizvodi/Proizvodi'
 import ProizvodiPromjena from './pages/proizvodi/ProizvodiPromjena'
 import ProizvodiDodaj from './pages/proizvodi/ProizvodiDodaj'
+import Radninalozi from './pages/radninalozi/Radninalozi'
+import RadninaloziDodaj from './pages/radninalozi/RadninaloziDodaj'
+import RadninaloziPromjena from './pages/radninalozi/RadninaloziPromjena'
 
 
 
@@ -33,6 +36,11 @@ function App() {
       <Route path={RoutesNames.PROIZVOD_PREGLED} element={<Proizvodi/>}/>
       <Route path={RoutesNames.PROIZVOD_NOVI} element={<ProizvodiDodaj/>}/>
       <Route path={RoutesNames.PROIZVOD_PROMJENI} element={<ProizvodiPromjena/>}/>
+
+      <Route path={RoutesNames.RADNINALOG_PREGLED} element={<Radninalozi/>}/>
+      <Route path={RoutesNames.RADNINALOG_NOVI} element={<RadninaloziDodaj/>}/>
+      <Route path={RoutesNames.RADNINALOG_PROMIJENI} element={<RadninaloziPromjena/>}/>
+
         
       </Routes>
     </>

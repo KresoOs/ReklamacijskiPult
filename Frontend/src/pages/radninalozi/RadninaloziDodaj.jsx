@@ -1,52 +1,61 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import {  Link, useNavigate } from "react-router-dom";
 import { RoutesNames } from "../../constants";
-import ProizvodService from "../../services/ProizvodService";
+
+import RadninalogService from "../../services/RadninalogService";
 
 
 
 
-export default function DjelatniciDodaj(){
+
+
+export default function RadninaloziDodaj(){
 
     const navigate = useNavigate();
     
-    async function dodaj(proizvod){
-        const odgovor = await ProizvodService.post(proizvod);
+    async function dodaj(radninalog){
+        const odgovor = await RadninalogService.post(radninalog);
         if(odgovor.greska){
             console.log(odgovor.poruka);
             alert('Pogledaj konzolu');
             return;
         }
-        navigate(RoutesNames.PROIZVOD_PREGLED);
+        navigate(RoutesNames.RADNINALOG_PREGLED);
     }
 
     function obradiSubmit(e){
         e.preventDefault();
         const podaci = new FormData(e.target);
-        const proizvod = {
-           ime: podaci.get('ime'),
-           opis: podaci.get('opis'),
-           jedinica_Kolicine: podaci.get('jedinica_Kolicine')
+        const radninalog = {
+           proizvodSifra: podaci.get('proizvodSifra'),
+           kupacSifra: podaci.get('kupacSifra'),
+           datum: podaci.get('datum'),
+           napomena: podaci.get('napomena')
 
         };
-        dodaj(proizvod);
+        dodaj(radninalog);
     }
 
 return(
 
     <Container>
         <Form onSubmit={obradiSubmit}>
-            <Form.Group controlId="ime">
-                <Form.Label>Ime</Form.Label>
-                <Form.Control type="text" name="ime"/>
+            <Form.Group controlId="proizvodSifra">
+                <Form.Label>Šifra proizvoda</Form.Label>
+                <Form.Control type="int" name="proizvodSifra"/>
             </Form.Group>
-            <Form.Group controlId="opis">
-                <Form.Label>Opis</Form.Label>
-                <Form.Control type="text" name="opis"/>
+            <Form.Group controlId="kupacSifra">
+                <Form.Label>Šifra Kupca</Form.Label>
+                <Form.Control type="int" name="kupacSifra"/>
             </Form.Group>
-            <Form.Group controlId="jedinica_Kolicine">
-                <Form.Label>Jedinica Količine</Form.Label>
-                <Form.Control type="text" name="jedinica_Kolicine"/>
+            <Form.Group controlId="datum">
+                <Form.Label>Datum</Form.Label>
+                <Form.Control type=""/>
+            </Form.Group>
+            
+            <Form.Group controlId="napomena">
+                <Form.Label>Napomena</Form.Label>
+                <Form.Control type="text" name="napomena"/>
             </Form.Group>
 
         
@@ -54,7 +63,7 @@ return(
 
          <Row>
             <Col xs={6} sm={6} md={3} lg={6}xl={6}>
-            <Link className="btn btn-danger siroko" to={RoutesNames.PROIZVOD_PREGLED}>
+            <Link className="btn btn-danger siroko" to={RoutesNames.RADNINALOG_PREGLED}>
                 Odustani
             </Link>
             </Col>

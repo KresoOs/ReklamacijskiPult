@@ -1,38 +1,40 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import {  Link, useNavigate, useParams } from "react-router-dom";
 import { RoutesNames } from "../../constants";
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { useEffect, useState } from "react";
 import ProizvodService from "../../services/ProizvodService";
+import RadninalogService from "../../services/RadninalogService";
 
 
 
-export default function ProizvodiPromjena(){
+export default function RadninaloziPromjena(){
 
     const navigate = useNavigate();
 
-    const [proizvod, setProizvod] = useState({});
+    const [radninalog, setRadninalog] = useState({});
 
     const routeParams = useParams();
     
-    async function dohvatiProizvod(){
-        const o = await ProizvodService.getBySifra(routeParams.sifra);
+    async function dohvatiRadninalog(){
+        const o = await RadninalogService.getBySifra(routeParams.sifra);
         if(o.greska){
             console.log(o.poruka);
             alert('pogledaj konzolu');
             return;
         }
-        setProizvod(o.poruka);
+        setRadninalog(o.poruka);
 
     }
-    async function promjeni(proizvod){
-        const odgovor = await ProizvodService.put(routeParams.sifra,proizvod);
+    async function promjeni(radninalog){
+        const odgovor = await ProizvodService.put(routeParams.sifra,radninalog);
         if(odgovor.greska){
             console.log(odgovor.poruka);
             alert('Pogledaj konzolu');
             return;
         }
-        navigate(RoutesNames.PROIZVOD_PREGLED);
+        navigate(RoutesNames.RADNINALOG_PREGLED);
     }
 
 
@@ -40,7 +42,7 @@ export default function ProizvodiPromjena(){
 
     useEffect(()=>{
 
-        dohvatiProizvod();
+        dohvatiRadninalog();
     },[]);
 
 
@@ -48,12 +50,13 @@ export default function ProizvodiPromjena(){
     function obradiSubmit(e){
         e.preventDefault();
         const podaci = new FormData(e.target);
-        const proizvod = {
-           ime: podaci.get('ime'),
-           opis: podaci.get('opis'),
-           jedinica_Kolicine: podaci.get('jedinica_Kolicine'),
+        const radninalog = {
+            proizvodSifra: podaci.get('proizvodSifra'),
+            kupacSifra: podaci.get('kupacSifra'),
+            datum: podaci.get(Date),
+            napomena: podaci.get('napomena')
         };
-        promjeni(proizvod);
+        promjeni(radninalog);
     }
 
 return(

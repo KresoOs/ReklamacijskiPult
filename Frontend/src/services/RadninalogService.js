@@ -1,5 +1,5 @@
 
-import {naziv_proizvod } from "../constants";
+import {naziv_proizvod, naziv_radninalog } from "../constants";
 import {HttpService} from "./HttpService";
 
 
@@ -9,7 +9,7 @@ import {HttpService} from "./HttpService";
 
 async function get(){
 
-    return await HttpService.get(naziv_proizvod)
+    return await HttpService.get(naziv_radninalog)
     .then((odgovor)=>{
 
 //console.table(odgovor.data);
@@ -23,9 +23,9 @@ return odgovor.data;
     })
 
 }
-async function post(proizvod){
+async function post(radninalog){
 
-    return await HttpService.post(naziv_proizvod,proizvod)
+    return await HttpService.post(naziv_radninalog,radninalog)
     .then((odgovor)=>{
 
 //console.table(odgovor.data);
@@ -39,9 +39,9 @@ return { greska: false, poruka: odgovor.data};
     })
 
 }
-async function put(sifra,proizvod){
+async function put(sifra,radninalog){
 
-    return await HttpService.put(naziv_proizvod+'/'+sifra,proizvod)
+    return await HttpService.put(naziv_radninalog+'/'+sifra,radninalog)
     .then((odgovor)=>{
 
 //console.table(odgovor.data);
@@ -55,9 +55,9 @@ return { greska: false, poruka: odgovor.data};
     })
 
 }
-async function _delete(sifraProizvoda){
+async function _delete(sifraRadnognaloga){
 
-    return await HttpService.delete(naziv_proizvod + '/'+sifraProizvoda)
+    return await HttpService.delete(naziv_radninalog + '/'+sifraRadnognaloga)
     .then((odgovor)=>{
 
 //console.table(odgovor.data);
@@ -72,7 +72,7 @@ return { greska: false, poruka: odgovor.data.poruka};
 
 }
 async function getBySifra(sifra){
-    return await HttpService.get(naziv_proizvod+'/'+sifra)
+    return await HttpService.get(naziv_radninalog+'/'+sifra)
     .then((o)=>{
 
         return {greska: false, poruka: o.data}
