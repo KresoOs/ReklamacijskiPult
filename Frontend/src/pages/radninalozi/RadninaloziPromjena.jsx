@@ -1,8 +1,7 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import {  Link, useNavigate, useParams } from "react-router-dom";
 import { RoutesNames } from "../../constants";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+
 import { useEffect, useState } from "react";
 import ProizvodService from "../../services/ProizvodService";
 import RadninalogService from "../../services/RadninalogService";

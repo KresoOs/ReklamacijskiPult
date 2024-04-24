@@ -60,7 +60,7 @@ namespace Backend.Models
         [Required(ErrorMessage ="Obavezan unos")]
         string? Naziv);
 
-    public record RadninalogDTORead(int Sifra, string? ProizvodIme, string? KupacImePrezime, DateTime? Datum, string? Napomena);
+    public record RadninalogDTORead(int Sifra, string? ProizvodIme, string? KupacImePrezime, DateTime? Datum, string? Napomena );
 
     public record RadninalogDTOInsertUpdate(
 
@@ -73,13 +73,7 @@ namespace Backend.Models
 
 
         );
-    public record PromjenaDTORead(int sifra , int? DjelatnikSifra , int? StanjeSifra , int? RadninalogSifra );
-
-    public record PromjenaDTOInsertUpdate(
-        int? DjelatnikSifra,
-        int? StanjeSifra,
-        int? RadninalogSifra
-        );
+    
 
 
 
