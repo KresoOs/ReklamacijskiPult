@@ -3,6 +3,7 @@ import {  Link, useNavigate } from "react-router-dom";
 import { RoutesNames } from "../../constants";
 
 import RadninalogService from "../../services/RadninalogService";
+import moment from "moment/moment";
 
 
 
@@ -26,14 +27,27 @@ export default function RadninaloziDodaj(){
     function obradiSubmit(e){
         e.preventDefault();
         const podaci = new FormData(e.target);
-        const radninalog = {
+        if(podaci.get('datum')== ''){
+            alert('Morate unijeti datum');
+            return;
+        }
+        let datum=null;
+        if(podaci.get('datum')!= ''){
+            const date =moment();
+          datum = date.format('YYYY-MM-DD');
+        }
+
+
+
+
+        dodaj ({
            proizvodSifra: podaci.get('proizvodSifra'),
            kupacSifra: podaci.get('kupacSifra'),
-           datum: podaci.get('datum'),
+           datum : podaci.get('datum'),
            napomena: podaci.get('napomena')
 
-        };
-        dodaj(radninalog);
+        });
+        
     }
 
 return(
@@ -47,12 +61,15 @@ return(
             <Form.Group controlId="kupacSifra">
                 <Form.Label>Šifra Kupca</Form.Label>
                 <Form.Control type="int" name="kupacSifra"/>
-            </Form.Group>
-            <Form.Group controlId="datum">
+
+                <Form.Group controlId="datum" >
                 <Form.Label>Datum</Form.Label>
-                <Form.Control type=""/>
+                <Form.Control type="date" name="datum"  />
             </Form.Group>
-            
+
+           
+        
+            </Form.Group>
             <Form.Group controlId="napomena">
                 <Form.Label>Napomena</Form.Label>
                 <Form.Control type="text" name="napomena"/>

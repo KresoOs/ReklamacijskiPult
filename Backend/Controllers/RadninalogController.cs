@@ -19,9 +19,9 @@ namespace Backend.Controllers
         }
         protected override void KontrolaBrisanje(Radninalog entitet)
         {
-            if (entitet != null && entitet.Kupac != null)
+            if (entitet != null && entitet.Stanja != null)
             {
-                throw new Exception("Ne može se obrisati radni nalog jer ima kupca");
+                throw new Exception("Ne može se obrisati radni nalog jer ima promjenu statusa");
             }
 
         }
@@ -32,10 +32,10 @@ namespace Backend.Controllers
             var proizvod = _context.Proizvodi.Find(dto.ProizvodSifra) ?? throw new Exception("Ne postoji proizvod sa šifrom" + dto.ProizvodSifra + "u bazi");
             var entitet = _mapper.MapInsertUpdatedFromDTO(dto);
             var napomena = dto.Napomena;
-
+            var datum = dto.Datum;
             entitet.Proizvod = proizvod;
             entitet.Kupac = kupac;
-            entitet.Datum = DateTime.Now;
+            entitet.Datum = datum;
             entitet.Napomena = napomena;
             return entitet;
             

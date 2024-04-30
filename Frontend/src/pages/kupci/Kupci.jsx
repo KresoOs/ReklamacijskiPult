@@ -6,26 +6,26 @@ import Container from 'react-bootstrap/Container';
 import { Button, Table } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { RoutesNames } from '../../constants';
-
-import RadninalogService from '../../services/RadninalogService';
-
+import KupacService from '../../services/KupacService';
 
 
 
 
 
 
-export default function Radninalozi(){
 
-  const[Radninalozi,setRadninalozi] = useState();
+
+export default function Kupci(){
+
+  const[kupci,setKupci] = useState();
   const navigate = useNavigate();
 
-  async function dohvatiRadnenaloge(){
-    await RadninalogService.get()
+  async function dohvatiKupce(){
+    await KupacService.get()
     .then((odg)=>{
 
 
-      setRadninalozi(odg);
+      setKupci(odg);
 
     })
     .catch((e=>{
@@ -36,18 +36,18 @@ export default function Radninalozi(){
   }
   useEffect(()=>{
 
-    dohvatiRadnenaloge();
+    dohvatiKupce();
 
 },[]);
 
 async function obrisiAsync(sifra){
-  const odgovor = await RadninalogService._delete(sifra);
+  const odgovor = await KupacService._delete(sifra);
   if(odgovor.greska){
       console.log(odgovor.poruka);
       alert('Pogledaj konzolu');
       return;
   }
-  dohvatiRadnenaloge();
+  dohvatiKupce();
 }
 
 function obrisi(sifra){
@@ -63,21 +63,21 @@ function obrisi(sifra){
 return(
     
     <Container>
-     <Link to={RoutesNames.RADNINALOG_NOVI}>Dodaj</Link>
+     <Link to={RoutesNames.KUPAC_NOVI}>Dodaj</Link>
       <Table striped bordered hover responsive>
         <thead>
           <tr>
             <th>
-              Šifra proizvoda
+              Ime
             </th>
             <th>
-              Šifra kupca
+              Prezime
             </th>
             <th>
-              Datum
+              Telefon
             </th>
             <th>
-              Napomena
+              E-mail
             </th>
             <th>
               Akcija
@@ -86,16 +86,17 @@ return(
           </tr>
         </thead>
         <tbody>
-          {Radninalozi && Radninalozi.map((radninalog,index)=>(
+          {kupci && kupci.map((kupac,index)=>(
 
            <tr key={index}>
-            <td>{radninalog.proizvodIme}</td>
-            <td>{radninalog.kupacImePrezime}</td>
-            <td>{radninalog.datum}</td>
-            <td>{radninalog.napomena}</td>
+            <td>{kupac.ime}</td>
+            <td>{kupac.prezime}</td>
+            <td>{kupac.telefon}</td>
+            <td>{kupac.email}</td>
             <td>
-              <Button onClick={()=>obrisi(radninalog.sifra)}variant='danger'>Obriši</Button>
-              <Button onClick={()=>{navigate(`/radninalozi/${radninalog.sifra}`)}} >Promijeni</Button>
+              <Button onClick={()=>obrisi(kupac.sifra)}variant='danger'>Obriši</Button>
+             
+              <Button onClick={()=>{navigate(`/kupci/${kupac.sifra}`)}} >Promijeni</Button>
             </td>
 
            </tr>

@@ -60,14 +60,14 @@ namespace Backend.Models
         [Required(ErrorMessage ="Obavezan unos")]
         string? Naziv);
 
-    public record RadninalogDTORead(int Sifra, string? ProizvodIme, string? KupacImePrezime, DateTime? Datum, string? Napomena );
+    public record RadninalogDTORead(int Sifra, string? ProizvodIme, string? KupacImePrezime, DateOnly? Datum, string? Napomena );
 
     public record RadninalogDTOInsertUpdate(
 
         int? ProizvodSifra,
         int? KupacSifra,
         [Required(ErrorMessage ="Obavezan unos")]
-        DateTime? Datum,
+        DateOnly? Datum,
         [Required(ErrorMessage ="Obavezan unos")]
         string? Napomena
 

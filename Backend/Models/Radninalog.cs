@@ -12,7 +12,7 @@ namespace Backend.Models
 
         public Kupac? Kupac { get; set; }
 
-        public DateTime? Datum { get; set; }
+        public DateOnly? Datum { get; set; }
 
         public string? Napomena  { get; set; }
 

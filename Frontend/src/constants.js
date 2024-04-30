@@ -11,7 +11,12 @@ PROIZVOD_PROMJENI: '/proizvodi/:sifra',
 
 RADNINALOG_PREGLED: '/radninalozi',
 RADNINALOG_NOVI: '/radninalozi/dodaj',
-RADNINALOG_PROMIJENI: '/radninalozi/:sifra'
+RADNINALOG_PROMIJENI: '/radninalozi/:sifra',
+
+
+KUPAC_PREGLED: '/kupci',
+KUPAC_NOVI: '/kupci/dodaj',
+KUPAC_PROMJENI: '/kupci/:sifra'
 
 };
 export const naziv_djelatnik = '/Djelatnik'

@@ -27,12 +27,12 @@ return(
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="https://kresimir-001-site1.jtempurl.com/swagger/index.html" target='_blank'>API</Nav.Link>
+            <Nav.Link href="https://reklamacijski-001-site1.ftempurl.com/swagger/index.html" target='_blank'>API</Nav.Link>
             <NavDropdown title="Reklamacije" id="collapsible-nav-dropdown">
               <NavDropdown.Item 
               onClick={()=>navigate(RoutesNames.DJELATNIK_PREGLED)}>Djelatnici
               </NavDropdown.Item>
-              <NavDropdown.Item onClick={()=>navigate(RoutesNames.KORISNIK_PREGLED)}>Korisnici
+              <NavDropdown.Item onClick={()=>navigate(RoutesNames.KUPAC_PREGLED)}>Kupci
                 
               </NavDropdown.Item>
               <NavDropdown.Item onClick={()=>navigate(RoutesNames.PROIZVOD_PREGLED)}>Proizvodi</NavDropdown.Item>

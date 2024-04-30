@@ -16,7 +16,9 @@ import ProizvodiDodaj from './pages/proizvodi/ProizvodiDodaj'
 import Radninalozi from './pages/radninalozi/Radninalozi'
 import RadninaloziDodaj from './pages/radninalozi/RadninaloziDodaj'
 import RadninaloziPromjena from './pages/radninalozi/RadninaloziPromjena'
-
+import Kupci from './pages/kupci/Kupci'
+import KupciDodaj from './pages/kupci/KupciDodaj'
+import KupciPromjena from './pages/kupci/KupciPromjena'
 
 
 function App() {
@@ -39,6 +41,11 @@ function App() {
       <Route path={RoutesNames.RADNINALOG_PREGLED} element={<Radninalozi/>}/>
       <Route path={RoutesNames.RADNINALOG_NOVI} element={<RadninaloziDodaj/>}/>
       <Route path={RoutesNames.RADNINALOG_PROMIJENI} element={<RadninaloziPromjena/>}/>
+
+
+      <Route path={RoutesNames.KUPAC_PREGLED} element={<Kupci/>}/>
+      <Route path={RoutesNames.KUPAC_NOVI} element={<KupciDodaj />}/>
+      <Route path={RoutesNames.KUPAC_PROMJENI} element={<KupciPromjena/>}/>
 
         
       </Routes>
