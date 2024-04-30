@@ -47,6 +47,10 @@ function App() {
       <Route path={RoutesNames.KUPAC_NOVI} element={<KupciDodaj />}/>
       <Route path={RoutesNames.KUPAC_PROMJENI} element={<KupciPromjena/>}/>
 
+      <Route path={RoutesNames.STATUS_PREGLED} element={<Statusi/>}/>
+      <Route path={RoutesNames.STATUS_NOVI} element={<StatusiDodaj />}/>
+      <Route path={RoutesNames.STATUS_PROMJENI} element={<StatusiPromjena/>}/>
+
         
       </Routes>
     </>

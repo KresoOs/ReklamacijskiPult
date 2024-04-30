@@ -76,7 +76,7 @@ namespace Backend.Controllers
             entitet.Polaznici = polaznici;
             */
 
-            // ovdje je možda pametnije ići s ručnim mapiranje
+            // ovdje je možda pametnije ići s ručnim mapiranjem
             entitet.Proizvod = proizvod;
             entitet.Kupac = kupac;
             entitet.Datum = dto.Datum;

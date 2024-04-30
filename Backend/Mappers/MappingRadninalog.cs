@@ -19,7 +19,7 @@ namespace Backend.Mappers
                     entitet.Datum,
                     
                     entitet.Napomena,
-                    entitet.Stanja!.Count()
+                    entitet.Stanja == null || entitet.Stanja.Count==0 ? "" : entitet.Stanja.LastOrDefault().Naziv
                     ));
 
             }));
@@ -32,7 +32,8 @@ namespace Backend.Mappers
                                                             entitet.Proizvod == null ? null : entitet.Proizvod.Sifra,
                                                             entitet.Kupac == null ? null : entitet.Kupac.Sifra,
                                                             entitet.Datum,
-                                                            entitet.Napomena));
+                                                            entitet.Napomena
+                                                            ));
 
 
                         }));
