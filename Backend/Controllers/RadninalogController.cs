@@ -33,10 +33,12 @@ namespace Backend.Controllers
             var entitet = _mapper.MapInsertUpdatedFromDTO(dto);
             var napomena = dto.Napomena;
             var datum = dto.Datum;
+            
             entitet.Proizvod = proizvod;
             entitet.Kupac = kupac;
             entitet.Datum = datum;
             entitet.Napomena = napomena;
+            entitet.Stanja = [];
             return entitet;
             
         }
@@ -45,6 +47,7 @@ namespace Backend.Controllers
             var lista = _context.Radninalozi
                     .Include(g => g.Proizvod)
                     .Include(g=>g.Kupac)
+                    .Include(g=>g.Stanja)
                     
                     
                     .ToList();
@@ -59,7 +62,7 @@ namespace Backend.Controllers
         }
         protected override Radninalog NadiEntitet(int sifra)
         {
-            return _context.Radninalozi.Include(g => g.Proizvod).Include(g=>g.Kupac).FirstOrDefault(x=>x.Sifra == sifra) ?? throw new Exception("Ne postoji nalog s šifrom " + sifra + " u bazi");
+            return _context.Radninalozi.Include(g => g.Proizvod).Include(g=>g.Kupac).Include(g=>g.Stanja).FirstOrDefault(x=>x.Sifra == sifra) ?? throw new Exception("Ne postoji nalog s šifrom " + sifra + " u bazi");
         }
         protected override Radninalog PromjeniEntitet(RadninalogDTOInsertUpdate dto, Radninalog entitet)
         {

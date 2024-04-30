@@ -17,7 +17,10 @@ namespace Backend.Mappers
                     entitet.Proizvod == null ? "" : entitet.Proizvod.Ime,
                     entitet.Kupac == null ? "" : (entitet.Kupac.Ime + " " + entitet.Kupac.Prezime).Trim(),
                     entitet.Datum,
-                    entitet.Napomena));
+                    
+                    entitet.Napomena,
+                    entitet.Stanja!.Count()
+                    ));
 
             }));
             MapperMapInsertUpdateToDTO = new Mapper(new MapperConfiguration(c =>

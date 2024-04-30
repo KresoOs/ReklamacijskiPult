@@ -80,6 +80,9 @@ return(
               Napomena
             </th>
             <th>
+              Status
+            </th>
+            <th>
               Akcija
             </th>
 
@@ -93,6 +96,7 @@ return(
             <td>{radninalog.kupacImePrezime}</td>
             <td>{radninalog.datum}</td>
             <td>{radninalog.napomena}</td>
+            <td>{radninalog.trenutnoStanje}</td>
             <td>
               <Button onClick={()=>obrisi(radninalog.sifra)}variant='danger'>Obriši</Button>
               <Button onClick={()=>{navigate(`/radninalozi/${radninalog.sifra}`)}} >Promijeni</Button>
