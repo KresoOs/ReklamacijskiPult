@@ -1,32 +1,32 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import StatusService from "../../services/StatusService";
+import StanjeService from "../../services/StanjeService";
 
-export default function Statusi(){
+export default function Stanja(){
 
-const[Statusi,setStatusi]=useState();
+const[Stanja,setStanje]=useState();
 const navigate = useNavigate();
-async function dohvatiStatuse(){
-    await StatusService.get()
+async function dohvatiStanje(){
+    await StanjeService.get()
     .then((odg=>{
-        setStatusi(odg);
+        setStanje(odg);
     }))
     .catch((e=>{
         console.log(e);
     }));
 }
 useEffect(()=>{
-    dohvatiStatuse();
+    dohvatiStanje();
 },[]);
 
 async function obrisiAsync(sifra){
-    const odgovor = await StatusService._delete(sifra);
+    const odgovor = await StanjeService._delete(sifra);
     if(odgovor.greska){
         console.log(odgovor.poruka);
         alert('Pogledaj konzolu');
         return;
     }
-    dohvatiStatuse();
+    dohvatiStanje();
   }
   
   function obrisi(sifra){
@@ -39,7 +39,7 @@ async function obrisiAsync(sifra){
   return(
     
     <Container>
-     <Link to={RoutesNames.RADNINALOG_NOVI}>Dodaj</Link>
+     <Link to={RoutesNames.STANJE_NOVI}>Dodaj</Link>
       <Table striped bordered hover responsive>
         <thead>
           <tr>
@@ -57,14 +57,14 @@ async function obrisiAsync(sifra){
           </tr>
         </thead>
         <tbody>
-          {Statusi && Statusi.map((Status,index)=>(
+          {Stanja && Stanja.map((stanje,index)=>(
 
            <tr key={index}>
-            <td>{Stanje.naziv}</td>
+            <td>{stanje.naziv}</td>
             
             <td>
               <Button onClick={()=>obrisi(stanje.sifra)}variant='danger'>Obriši</Button>
-              <Button onClick={()=>{navigate(`/radninalozi/${radninalog.sifra}`)}} >Promijeni</Button>
+              <Button onClick={()=>{navigate(`/stanja/${stanje.sifra}`)}} >Promijeni</Button>
             </td>
 
            </tr>
@@ -84,4 +84,3 @@ async function obrisiAsync(sifra){
 
 
 
-}

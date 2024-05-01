@@ -40,7 +40,7 @@ return(
               <NavDropdown.Item onClick={()=>navigate(RoutesNames.RADNINALOG_PREGLED)}>
                 Radni nalozi
               </NavDropdown.Item>
-              <NavDropdown.Item onClick={()=>navigate(RoutesNames.STATUS_PREGLED)}>
+              <NavDropdown.Item onClick={()=>navigate(RoutesNames.STANJE_PREGLED)}>
                 Statusi
               </NavDropdown.Item>
             </NavDropdown>

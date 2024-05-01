@@ -16,11 +16,15 @@ RADNINALOG_PROMIJENI: '/radninalozi/:sifra',
 
 KUPAC_PREGLED: '/kupci',
 KUPAC_NOVI: '/kupci/dodaj',
-KUPAC_PROMJENI: '/kupci/:sifra'
+KUPAC_PROMJENI: '/kupci/:sifra',
+
+STANJE_PREGLED: '/stanja',
+STANJE_NOVI: '/stanja/dodaj',
+STANJE_PROMJENI: '/stanja/:sifra'
 
 };
 export const naziv_djelatnik = '/Djelatnik'
 export const naziv_proizvod = '/Proizvod'
 export const naziv_kupac = '/Kupac'
 export const naziv_radninalog = '/Radninalog'
-export const naziv_status = '/Status'
+export const naziv_stanje = '/Stanje'

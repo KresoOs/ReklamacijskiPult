@@ -1,8 +1,71 @@
 
-.kursor{
+
+
+
+
+
+:root {
+  --light-theme: #f5f5f5;
+  --dark-theme: #333;
+  --text-color-light: #000;
+  --text-color-dark: #fff;
+}
+
+.kursor {
   cursor: pointer;
 }
 
-.siroko{
-  width:100%;
+.siroko {
+  width: 100%;
+}
+
+.tamnaP {
+  background-color: var(--dark-theme);
+  color: var(--text-color-dark);
+}
+
+.sivoP {
+  background-color: var(--light-theme);
+  color: var(--text-color-light);
+}
+
+.themeSwitcher {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.themeSwitcher input {
+  display: none;
+}
+
+.themeSwitcher:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 26px;
+  height: 14px;
+  background-color: var(--dark-theme);
+  transition: background-color 0.3s ease;
+}
+
+.themeSwitcher:after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+  transition: left 0.3s ease;
+}
+
+.themeSwitcher:checked:before {
+  background-color: var(--light-theme);
+}
+
+.themeSwitcher:checked:after {
+  left: 14px;
 }
