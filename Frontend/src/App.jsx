@@ -19,6 +19,9 @@ import RadninaloziPromjena from './pages/radninalozi/RadninaloziPromjena'
 import Kupci from './pages/kupci/Kupci'
 import KupciDodaj from './pages/kupci/KupciDodaj'
 import KupciPromjena from './pages/kupci/KupciPromjena'
+import Stanja from './pages/stanja/Stanja'
+import StanjaDodaj from './pages/stanja/StanjaDodaj'
+import StanjaPromjena from './pages/stanja/StanjaPromjena'
 
 
 function App() {
@@ -47,9 +50,9 @@ function App() {
       <Route path={RoutesNames.KUPAC_NOVI} element={<KupciDodaj />}/>
       <Route path={RoutesNames.KUPAC_PROMJENI} element={<KupciPromjena/>}/>
 
-      <Route path={RoutesNames.STATUS_PREGLED} element={<Statusi/>}/>
-      <Route path={RoutesNames.STATUS_NOVI} element={<StatusiDodaj />}/>
-      <Route path={RoutesNames.STATUS_PROMJENI} element={<StatusiPromjena/>}/>
+      <Route path={RoutesNames.STANJE_PREGLED} element={<Stanja/>}/>
+      <Route path={RoutesNames.STANJE_NOVI} element={<StanjaDodaj />}/>
+      <Route path={RoutesNames.STANJE_PROMJENI} element={<StanjaPromjena/>}/>
 
         
       </Routes>
