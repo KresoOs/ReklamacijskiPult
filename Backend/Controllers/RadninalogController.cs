@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace Backend.Controllers
 {
+   
     [ApiController]
     [Route("api/v1/[controller]")]
     public class RadninalogController : ReklamacijskiController<Radninalog, RadninalogDTORead, RadninalogDTOInsertUpdate>
@@ -84,6 +85,32 @@ namespace Backend.Controllers
             
 
             return entitet;
+        }
+        [HttpPut("{sifra}/PromjeniStatus")]
+        public IActionResult ChangeStatus(int sifra, int newStatus)
+        {
+            var radninalog = NadiEntitet(sifra);
+            if (radninalog == null)
+            {
+                throw new Exception("Radni nalog ne postoji");
+            }
+
+            var status = _context.Stanja.FirstOrDefault(s => s.Sifra == newStatus);
+            if (status == null)
+            {
+                throw new Exception("Status sa zadanom sifrom ne postoji");
+            }
+            if (radninalog.Stanja != null)
+            {
+                radninalog.Stanja.Remove(radninalog.Stanja.FirstOrDefault(s => s.Sifra == radninalog.Stanja.First().Sifra));
+            }
+
+            radninalog.Stanja.Add(status);
+            _context.Radninalozi.Update(radninalog);
+            _context.SaveChanges();
+
+
+            return Ok();
         }
     }
 
