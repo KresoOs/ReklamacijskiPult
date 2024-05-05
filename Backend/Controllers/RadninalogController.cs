@@ -20,7 +20,7 @@ namespace Backend.Controllers
         }
         protected override void KontrolaBrisanje(Radninalog entitet)
         {
-            if (entitet != null && entitet.Stanja != null)
+            if (entitet == null)
             {
                 throw new Exception("Ne može se obrisati radni nalog jer ima promjenu statusa");
             }
@@ -71,13 +71,7 @@ namespace Backend.Controllers
             var proizvod = _context.Proizvodi.Find(dto.ProizvodSifra) ?? throw new Exception("Ne postoji proizvod s šifrom " + dto.ProizvodSifra + " u bazi");
 
 
-            /*
-            List<Polaznik> polaznici = entitet.Polaznici;
-            entitet = _mapper.MapInsertUpdatedFromDTO(dto);
-            entitet.Polaznici = polaznici;
-            */
-
-            // ovdje je možda pametnije ići s ručnim mapiranjem
+           
             entitet.Proizvod = proizvod;
             entitet.Kupac = kupac;
             entitet.Datum = dto.Datum;
@@ -86,8 +80,25 @@ namespace Backend.Controllers
 
             return entitet;
         }
-        [HttpPut("{sifra}/PromjeniStatus")]
-        public IActionResult ChangeStatus(int sifra, int newStatus)
+        [HttpGet]
+        [Route("statusi")]
+        public IActionResult GetStatuses()
+        {
+
+            var lista = _context.Stanja.ToList();
+
+
+            if (lista == null || lista.Count == 0)
+            {
+                throw new Exception("Ne postoje podaci u bazi");
+            }
+            var filtLista = lista.Select(s => new {s.Sifra,s.Naziv });
+            return new JsonResult(filtLista);
+
+        }
+            [HttpPut]
+        [Route("{sifra:int}/PromjeniStatus/{statusSifra:int}")]
+        public IActionResult ChangeStatus(int sifra, int statusSifra)
         {
             var radninalog = NadiEntitet(sifra);
             if (radninalog == null)
@@ -95,7 +106,7 @@ namespace Backend.Controllers
                 throw new Exception("Radni nalog ne postoji");
             }
 
-            var status = _context.Stanja.FirstOrDefault(s => s.Sifra == newStatus);
+            var status = _context.Stanja.FirstOrDefault(s => s.Sifra == statusSifra);
             if (status == null)
             {
                 throw new Exception("Status sa zadanom sifrom ne postoji");

@@ -45,7 +45,7 @@ async function put(sifra,djelatnik){
     .then((odgovor)=>{
 
 //console.table(odgovor.data);
-return { greska: false, poruka: odgovor.data};
+            return { greska: false, poruka: odgovor.data};
 
     })
     .catch((e)=>{
@@ -61,19 +61,20 @@ async function _delete(sifraDjelatnika){
     .then((odgovor)=>{
 
 //console.table(odgovor.data);
-return { greska: false, poruka: odgovor.data.poruka};
+return { greska: false, poruka: odgovor.data};
 
     })
     .catch((e)=>{
 
        // console.log(e);
-       return {greska: true, poruka: e };
+       return {greska: true, data: e };
     })
 
 }
 async function getBySifra(sifra){
     return await HttpService.get(naziv_djelatnik+'/'+sifra)
     .then((o)=>{
+        
 
         return {greska: false, poruka: o.data}
     })
